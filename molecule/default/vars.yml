@@ -1,0 +1,7 @@
+keepalived_rid: "router"
+keepalived_vips:
+  - 127.0.0.13
+  - 127.0.0.15
+keepalived_vrid: "197"
+keepalived_priority: "127"
+keepalived_pass: "you-secret-pass"

@@ -1,0 +1,19 @@
+- name: "Keepalived | install keepalived"
+  apt:
+    name: "keepalived"
+    state: "present"
+    update_cache: true
+    install_recommends: false
+
+- name: "Keepalived | configure keepalived"
+  template:
+    src: "keepalived.conf.j2"
+    dest: "/etc/keepalived/keepalived.conf"
+    mode: "0600"
+  register: keepalived_conf
+
+- name: "Keepalived | start keepalived"
+  systemd:
+    name: "keepalived"
+    enabled: true
+    state: "{{ 'restarted' if keepalived_conf.changed else 'started' }}"

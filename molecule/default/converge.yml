@@ -1,0 +1,17 @@
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "include keepalived vars"
+      include_vars:
+        file: "vars.yml"
+
+    - name: "create keepalived_group"
+      add_host:
+        name: "{{ item }}"
+        groups: "{{ keepalived_group }}"
+      with_items: 
+        - "{{ ansible_play_hosts }}"
+
+    - name: "keepalived"
+      import_role:
+        name: "keepalived"

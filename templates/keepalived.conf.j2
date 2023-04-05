@@ -1,0 +1,26 @@
+global_defs {
+    router_id {{ keepalived_rid if keepalived_rid | length > 0 else ansible_hostname }}
+}
+
+vrrp_instance {{ ansible_hostname }} {
+  state {{ "MASTER" if inventory_hostname == groups[keepalived_group][0] else "BACKUP" }}
+  interface {{ ansible_default_ipv4.interface }}
+  virtual_router_id {{ keepalived_vrid }}
+{% if keepalived_priority | length > 0 %}
+  priority "{{ keepalived_priority }}"
+{% else %}
+  priority {{ "200" if inventory_hostname == groups[keepalived_group][0] else "100" }}
+{% endif %}
+  virtual_ipaddress {
+{% for ip in keepalived_vips %}
+    {{ ip }}
+{% endfor %}
+  }
+{% if keepalived_pass | length > 0 %}
+
+  authentication {
+    auth_type PASS
+    auth_pass {{ keepalived_pass }}
+  }
+{% endif %}
+}

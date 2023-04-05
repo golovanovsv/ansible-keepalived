@@ -1,0 +1,15 @@
+# Параметры для keepalived
+keepalived_group: "keepalived_group"
+# String identifying the machine
+# by default {{ ansible_hostname }}
+keepalived_rid: ""
+keepalived_vips:
+  - 127.0.0.13
+# arbitary unique number 0..255
+# used to differentiate multiple instances of vrrpd
+keepalived_vrid: "213"
+
+keepalived_priority: ""
+
+# Аутентификация для пиров.
+keepalived_pass: ""

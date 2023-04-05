@@ -1,0 +1,15 @@
+galaxy_info:
+  role_name: "keepalived"
+  author: "golovanovsv"
+  description: "An [Ansible](https://www.ansible.com) role to setup [keepalived](https://github.com/acassen/keepalived)"
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - bionic
+        - focal
+        - jammy
+  galaxy_tags:
+    - ubuntu
+    - docker
